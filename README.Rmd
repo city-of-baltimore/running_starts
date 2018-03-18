@@ -1,0 +1,33 @@
+---
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Running Starts!
+
+<img src = "http://gis.baltimorecity.gov/images/CITY-LOGO.png" width = 100/>
+
+## Overview
+
+Have you been meaning to learn code or how to work with data?  Want to give it a shot by digging into Baltimore's own open datasets?  We want to give you a running start!
+
+We're publishing some templates that will load up a dataset from [Open Baltimore](https://data.baltimorecity.gov/) and give you a few examples of how to visualize and interpret the dataset. 
+
+<img src = "https://www.r-project.org/logo/Rlogo.png" width = 100/> 
+
+R is an open-source (read: free!) computer language that was designed specifically for data analysis. There's a large community of R users that have 
+
+### Get Going
+
+1. [Download and install R (free!)](https://cran.r-project.org/mirrors.html). Any of the links on that page should be fine to use.
+
+2. [Download and install RStudio (free!)](https://www.rstudio.com/products/rstudio/download/#download). This is an application that will enable you to create your R code and run it.
+
+3. Download the "Running Starts" files by clicking on the green "Clone or download button" on this page and clicking the "Download ZIP" option. Remember where you save the folder so you can use it!
+
+4. Open RStudio and get to work!
+
+### Explore!

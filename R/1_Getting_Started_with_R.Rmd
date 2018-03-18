@@ -1,0 +1,62 @@
+---
+title: "Getting Started with R and Open Baltimore"
+output: html_notebook
+---
+
+<img src = "http://gis.baltimorecity.gov/images/CITY-LOGO.png" width = 100/>  <img src = "https://www.r-project.org/logo/Rlogo.png" width = 100/> 
+
+## Welcome!
+
+We're excited to have you on board to learn about code and data, and we want to thank you in advance for wanting to do it using Baltimore's own open data. We're going to explore the [housing permits data from Open Baltimore](https://data.baltimorecity.gov/Housing-Development/Housing-Permits/fesm-tgxf).
+
+## This Document
+
+What you're looking at is called an R notebook. It's a very rich format - we can use plain ol' text (as you're reading!), hyperlinks to websites and such, show images, and yes, include code and plots. This makes it easy to document and explain what you're doing, things you've tried that have or haven't worked, and present some results.
+
+When you want to write some code, use the format shown below.
+
+```{r}
+# This is a "code chunk." If you start a line with a hashtag, the line is a comment. This means that whatever is on that line will not be processed as code.
+```
+
+# Packages
+
+To make our lives easier, we're going to use some ready-made tools. The R community is great because once a problem has been solved, the tools to solve it are often published in small libraries of code called "packages" that are created by hard-working and helpful R users. We can download as many of these packages as we'd like for free! Two that we'll be using are "tidyverse" and "RSocrata".
+
+Tidyverse is a package created by an R guru named Hadley Wickham. Tidyverse has become the de facto standard for data analysis best practices in R - more importantly for us, it makes code easy to read and intuitive.  Hadley wrote a freely available book called "[R for Data Science](http://r4ds.had.co.nz/)" that we highly recommend you check out.
+
+The RSocrata package will let us talk directly to the live dataset on Open Baltimore without us having to download a file and read it in.
+
+```{r}
+# Uncomment these lines by deleting the hashtag the first time you run this file so that the right packages are installed.  You only have to install them once, so when you're done, you can comment them out again.
+#install.packages("tidyverse")
+#install.packages("RSocrata")
+
+# These next two lines you'll want to run at the start of an R session so that you've got the right tools at your disposal.
+library(tidyverse)
+library(RSocrata)
+```
+
+Now that we've got a few tools, let's load up some data!  We're going to be working with housing permits for the City of Baltimore.
+
+When we want to store data, a number, some text, or any other object for later use, we give it a descriptive name and use "<-" instead of an equals sign to store it.  
+
+```{r}
+# We want to connect directly to the dataset posted on Open Baltimore. The dataset has a link called an "API endpoint" that will enable us to talk directly to it through code. Let's store that in a variable called "endpoint". Text information in code is surrounded by quotation marks to distinguish it from numbers or stored objects.
+endpoint <- "https://data.baltimorecity.gov/resource/9t78-k3wf.json"  
+```
+
+```{r}
+# Next, let's use that endpoint to grab the data and store it for analysis. We will call it "permits". The RSocrata package makes that very easy to do using a function. There are more than 500,000 records in this dataset, so it might take a minute!
+permits <- read.socrata(endpoint)
+```
+
+Congratulations! You've loaded the data! What does this dataset look like? 
+
+```{r}
+head(permits)
+```
+
+Each row is another permit, and each column tells us something about that permit - cost estimate, which council district or police district it's in, its expiration date, etc.
+
+
