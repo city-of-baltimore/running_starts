@@ -23,7 +23,7 @@ When you want to write some code, use the format shown below.
 
 To make our lives easier, we're going to use some ready-made tools. The R community is great because once a problem has been solved, the tools to solve it are often published in small libraries of code called "packages" that are created by hard-working and helpful R users. We can download as many of these packages as we'd like for free! Two that we'll be using are "tidyverse" and "RSocrata".
 
-Tidyverse is a package created by an R guru named Hadley Wickham. Tidyverse has become the de facto standard for data analysis best practices in R - more importantly for us, it makes code easy to read and intuitive.  Hadley wrote a freely available book called "[R for Data Science](http://r4ds.had.co.nz/)" that we highly recommend you check out.
+Tidyverse is a package (well, a collection of packages) created by an R guru named Hadley Wickham. Tidyverse has become the de facto standard for data analysis best practices in R - more importantly for us, it makes code easy to read and intuitive.  Hadley wrote a freely available book called "[R for Data Science](http://r4ds.had.co.nz/)" that we highly recommend you check out.
 
 The RSocrata package will let us talk directly to the live dataset on Open Baltimore without us having to download a file and read it in.
 
@@ -36,6 +36,8 @@ The RSocrata package will let us talk directly to the live dataset on Open Balti
 library(tidyverse)
 library(RSocrata)
 ```
+
+# Get some data!
 
 Now that we've got a few tools, let's load up some data!  We're going to be working with housing permits for the City of Baltimore.
 
@@ -59,4 +61,18 @@ head(permits)
 
 Each row is another permit, and each column tells us something about that permit - cost estimate, which council district or police district it's in, its expiration date, etc.
 
+# Start asking questions!
 
+Now that we've got our data loaded up, we can start investigating. For example, how many permits have been created in each neighborhood? We can use the "count" function from the tidyverse package to count up the number in each neighborhood, then we can arrange the result in order of descending permits so we can look at the top neighborhoods.
+
+```{r}
+permits %>% count(neighborhood) %>% arrange(desc(n))
+```
+
+Canton has more that 30,000 permits in the database. But what is "NA"? An NA is R's way of saying the value is missing. In this case, it means that more than 20,000 permits in the database do not have a neighborhood recorded.
+
+What if we want to know the average cost estimate? With tidyverse, we'll want to "summarise" the dataset; in other words, collapse or summarise the whole dataset into a single number of interest. We'll name the resulting number "avg.cost.est" to describe that it's the average cost estimate, and it will be calculated by taking the mean (a built in R function) of the "cost_est" variable. We'll also tell the mean function to remove the NA's so it doesn't get confused.
+
+```{r}
+permits %>% summarise(avg.cost.est = mean(cost_est, na.rm = TRUE))
+```
